@@ -16,7 +16,7 @@ export class UserService {
         return this.userRepository.createUser(user)
     }
 
-    getUser = () => {
+    getUser = (name?: string, email?: string) => {
         return 
     }
 

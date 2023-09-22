@@ -21,12 +21,16 @@ export class UserController {
             return response.status(400).json({ message: 'Bad Request - E-mail inválido' })
         }
 
-        this.userService.createUser(user.name, user.email)
+        if(!user.password){
+            return response.status(400).json({ message: 'Bad Request - Password inválido' })
+        }
+
+        this.userService.createUser(user.name, user.email, user.password)
         return response.status(200).json({ message: 'Usuário criado' })
     }
 
-    getAllUsers = (request: Request, response: Response) => {
-        const users = this.userService.getAllUsers()
+    getUser = (request: Request, response: Response) => {
+        const users = this.userService.getUser()
         return response.status(200).json( users )
     }
 
