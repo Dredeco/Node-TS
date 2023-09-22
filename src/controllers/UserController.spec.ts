@@ -11,7 +11,7 @@ describe('UserController', () => {
 
     const mockUserService: Partial<UserService> = {
         createUser: jest.fn(),
-        getAllUsers: jest.fn(),
+        getUser: jest.fn(),
         deleteUser: jest.fn()
     }
 
