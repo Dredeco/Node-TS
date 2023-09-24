@@ -16,8 +16,8 @@ export class UserService {
         return this.userRepository.createUser(user)
     }
 
-    getUser = () => {
-        return 
+    getAllUsers = () => {
+        return this.db
     }
 
     deleteUser = (name: string, email: string) => {

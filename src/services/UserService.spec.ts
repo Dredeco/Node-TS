@@ -1,8 +1,5 @@
-import { UserService } from "./UserService"
+import { User, UserService } from "./UserService"
 
-jest.mock('../repositories/UserRepository')
-
-const mockUserRepository = require('../repositories/UserRepository')
 
 describe('UserService', () => {
     const userService = new UserService(mockUserRepository)
