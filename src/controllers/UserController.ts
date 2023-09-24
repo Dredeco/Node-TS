@@ -13,20 +13,16 @@ export class UserController {
     createUser = (request: Request, response: Response) => {
         const user = request.body
 
-        if(!user.name){
-            return response.status(400).json({ message: 'Bad Request - Nome inválido' })
+        if(!user.name || !user.email || !user.password){
+            return response.status(400).json({ message: 'Bad Request - Todos os campos são obrigatórios' })
         }
 
-        if(!user.email){
-            return response.status(400).json({ message: 'Bad Request - E-mail inválido' })
-        }
-
-        this.userService.createUser(user.name, user.email)
+        this.userService.createUser(user.name, user.email, user.password)
         return response.status(200).json({ message: 'Usuário criado' })
     }
 
-    getAllUsers = (request: Request, response: Response) => {
-        const users = this.userService.getAllUsers()
+    getUser = (request: Request, response: Response) => {
+        const users = this.userService.getUser()
         return response.status(200).json( users )
     }
 

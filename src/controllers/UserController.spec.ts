@@ -11,7 +11,7 @@ describe('UserController', () => {
 
     const mockUserService: Partial<UserService> = {
         createUser: jest.fn(),
-        getAllUsers: jest.fn(),
+        getUser: jest.fn(),
         deleteUser: jest.fn()
     }
 
@@ -21,7 +21,8 @@ describe('UserController', () => {
         const mockResquest = {
             body: {
                 name: 'Andre',
-                email: 'andre@test.com'
+                email: 'andre@test.com',
+                password: '123456'
             }
         } as Request
         const mockResponse = makeMockResponse()
@@ -35,35 +36,52 @@ describe('UserController', () => {
         const mockResquest = {
             body: {
                 name: '',
-                email: 'andre@test.com'
+                email: 'andre@test.com',
+                password: '123456'
             }
         } as Request
         const mockResponse = makeMockResponse()
 
             userController.createUser(mockResquest, mockResponse)
             expect(mockResponse.state.status).toBe(400)
-            expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request - Nome inválido' })
+            expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request - Todos os campos são obrigatórios' })
     })
 
     it('Deve apresentar erro se o E-mail estiver vazio', () => {
         const mockResquest = {
             body: {
-                name: 'André',
-                email: ''
+                name: 'Andre',
+                email: '',
+                password: '123456'
             }
         } as Request
         const mockResponse = makeMockResponse()
 
             userController.createUser(mockResquest, mockResponse)
             expect(mockResponse.state.status).toBe(400)
-            expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request - E-mail inválido' })
+            expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request - Todos os campos são obrigatórios' })
+    })
+
+    it('Deve apresentar erro se o Password estiver vazio', () => {
+        const mockResquest = {
+            body: {
+                name: 'Andre',
+                email: 'andre@test.com',
+                password: ''
+            }
+        } as Request
+        const mockResponse = makeMockResponse()
+
+            userController.createUser(mockResquest, mockResponse)
+            expect(mockResponse.state.status).toBe(400)
+            expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request - Todos os campos são obrigatórios' })
     })
 
     it('Deve retornar uma lista com todos os usuários', () => {
         const mockResquest = {} as Request
         const mockResponse = makeMockResponse()
 
-            userController.getAllUsers(mockResquest, mockResponse)
+            userController.getUser(mockResquest, mockResponse)
             expect(mockResponse.state.status).toBe(200)
     })
 
