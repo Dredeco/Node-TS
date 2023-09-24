@@ -25,7 +25,8 @@ describe('UserController', () => {
         const mockResquest = {
             body: {
                 name: 'Andre',
-                email: 'andre@test.com'
+                email: 'andre@test.com',
+                password: '123456'
             }
         } as Request
 
@@ -38,7 +39,8 @@ describe('UserController', () => {
         const mockResquest = {
             body: {
                 name: '',
-                email: 'andre@test.com'
+                email: 'andre@test.com',
+                password: '123456'
             }
         } as Request
 
@@ -51,7 +53,8 @@ describe('UserController', () => {
         const mockResquest = {
             body: {
                 name: 'André',
-                email: ''
+                email: '',
+                password: '123456'
             }
         } as Request
 
@@ -71,7 +74,7 @@ describe('UserController', () => {
 
             userController.createUser(mockResquest, mockResponse)
             expect(mockResponse.state.status).toBe(400)
-            expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request - Password inválido' })
+            expect(mockResponse.state.json).toMatchObject({ message: 'Bad Request - Todos os campos são obrigatórios' })
     })
 
 
