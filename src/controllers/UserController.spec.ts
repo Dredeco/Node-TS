@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { UserController } from "./UserController"
 import { makeMockResponse } from "../__mocks__/mockResponse.mock";
+import { makeMockRequest } from "../__mocks__/mockRequest.mock";
 
 const mockUserService = {
         createUser: jest.fn(),
@@ -95,5 +96,17 @@ describe('UserController', () => {
 
             userController.deleteUser(mockResquest, mockResponse)
             expect(mockResponse.state.status).toBe(200)
+    })
+
+    it('Deve retornar o usuário com o userID informado', () => {
+        const mockResquest = makeMockRequest({
+            params: {
+                userID: '123456'
+            }
+        })
+
+        userController.getUser(mockResquest, mockResponse)
+        expect(mockUserService.getUser).toHaveBeenCalledWith('123456')
+        expect(mockResponse.state.status).toBe(200)
     })
 })

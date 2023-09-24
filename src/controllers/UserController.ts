@@ -21,9 +21,14 @@ export class UserController {
         return response.status(200).json({ message: 'Usuário criado' })
     }
 
-    getUser = (request: Request, response: Response) => {
-        const users = this.userService.getUser()
-        return response.status(200).json( users )
+    getUser = async (request: Request, response: Response) => {
+        const { userID } = request.params
+        const user = await this.userService.getUser(userID)
+        return response.status(200).json({
+            userID: user?.user_id,
+            name: user?.name,
+            email: user?.email
+        })
     }
 
     deleteUser = (request: Request, response: Response) => {

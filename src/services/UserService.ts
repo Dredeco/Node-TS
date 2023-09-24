@@ -17,8 +17,8 @@ export class UserService {
         return this.userRepository.createUser(user)
     }
 
-    getUser = (email?: string, password?: string) => {
-        return 
+    getUser = (userID: string): Promise<User | null> => {
+        return this.userRepository.getUser(userID)
     }
 
     getAuthenticatedUser = (email: string, password: string): Promise<User | null> => {
