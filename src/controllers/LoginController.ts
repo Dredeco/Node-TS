@@ -1,5 +1,4 @@
 import { Request, Response } from "express"
-import { sign } from "jsonwebtoken"
 import { UserService } from "../services/UserService"
 
 export class LoginController {
